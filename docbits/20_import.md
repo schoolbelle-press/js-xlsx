@@ -18,21 +18,55 @@ var workbook = XLSX.readFile('test.xlsx');
 </details>
 
 <details>
+  <summary><b>Photoshop ExtendScript read a file</b> (click to show)</summary>
+
+`readFile` wraps the `File` logic in Photoshop and other ExtendScript targets.
+The specified path should be an absolute path:
+
+```js
+#include "xlsx.extendscript.js"
+/* Read test.xlsx from the Documents folder */
+var workbook = XLSX.readFile(Folder.myDocuments + '/' + 'test.xlsx');
+/* DO SOMETHING WITH workbook HERE */
+```
+
+The [`extendscript` demo](demos/extendscript/) includes a more complex example.
+
+</details>
+
+<details>
   <summary><b>Browser read TABLE element from page</b> (click to show)</summary>
 
 The `table_to_book` and `table_to_sheet` utility functions take a DOM TABLE
 element and iterate through the child nodes.
 
 ```js
-var worksheet = XLSX.utils.table_to_book(document.getElementById('tableau'));
+var workbook = XLSX.utils.table_to_book(document.getElementById('tableau'));
 /* DO SOMETHING WITH workbook HERE */
+```
+
+Multiple tables on a web page can be converted to individual worksheets:
+
+```js
+/* create new workbook */
+var workbook = XLSX.utils.book_new();
+
+/* convert table 'table1' to worksheet named "Sheet1" */
+var ws1 = XLSX.utils.table_to_sheet(document.getElementById('table1'));
+XLSX.utils.book_append_sheet(workbook, ws1, "Sheet1");
+
+/* convert table 'table2' to worksheet named "Sheet2" */
+var ws2 = XLSX.utils.table_to_sheet(document.getElementById('table2'));
+XLSX.utils.book_append_sheet(workbook, ws2, "Sheet2");
+
+/* workbook now has 2 worksheets */
 ```
 
 Alternatively, the HTML code can be extracted and parsed:
 
 ```js
 var htmlstr = document.getElementById('tableau').outerHTML;
-var worksheet = XLSX.read(htmlstr, {type:'string'});
+var workbook = XLSX.read(htmlstr, {type:'string'});
 ```
 
 </details>
@@ -41,7 +75,7 @@ var worksheet = XLSX.read(htmlstr, {type:'string'});
   <summary><b>Browser download file (ajax)</b> (click to show)</summary>
 
 Note: for a more complete example that works in older browsers, check the demo
-at <http://oss.sheetjs.com/js-xlsx/ajax.html>).  The <demos/xhr/> directory also
+at <http://oss.sheetjs.com/js-xlsx/ajax.html>.  The [`xhr` demo](demos/xhr/)
 includes more examples with `XMLHttpRequest` and `fetch`.
 
 ```js
@@ -67,24 +101,20 @@ req.send();
 <details>
   <summary><b>Browser drag-and-drop</b> (click to show)</summary>
 
-Drag-and-drop uses the HTML5 `FileReader` API, loading the data with
-`readAsBinaryString` or `readAsArrayBuffer`.  Since not all browsers support the
-full `FileReader` API, dynamic feature tests are highly recommended.
+Drag-and-drop uses the HTML5 `FileReader` API.
 
 ```js
-var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
 function handleDrop(e) {
   e.stopPropagation(); e.preventDefault();
   var files = e.dataTransfer.files, f = files[0];
   var reader = new FileReader();
   reader.onload = function(e) {
-    var data = e.target.result;
-    if(!rABS) data = new Uint8Array(data);
-    var workbook = XLSX.read(data, {type: rABS ? 'binary' : 'array'});
+    var data = new Uint8Array(e.target.result);
+    var workbook = XLSX.read(data, {type: 'array'});
 
     /* DO SOMETHING WITH workbook HERE */
   };
-  if(rABS) reader.readAsBinaryString(f); else reader.readAsArrayBuffer(f);
+  reader.readAsArrayBuffer(f);
 }
 drop_dom_element.addEventListener('drop', handleDrop, false);
 ```
@@ -98,24 +128,26 @@ Data from file input elements can be processed using the same `FileReader` API
 as in the drag-and-drop example:
 
 ```js
-var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
 function handleFile(e) {
   var files = e.target.files, f = files[0];
   var reader = new FileReader();
   reader.onload = function(e) {
-    var data = e.target.result;
-    if(!rABS) data = new Uint8Array(data);
-    var workbook = XLSX.read(data, {type: rABS ? 'binary' : 'array'});
+    var data = new Uint8Array(e.target.result);
+    var workbook = XLSX.read(data, {type: 'array'});
 
     /* DO SOMETHING WITH workbook HERE */
   };
-  if(rABS) reader.readAsBinaryString(f); else reader.readAsArrayBuffer(f);
+  reader.readAsArrayBuffer(f);
 }
 input_dom_element.addEventListener('change', handleFile, false);
 ```
 
+The [`oldie` demo](demos/oldie/) shows an IE-compatible fallback scenario.
+
 </details>
 
+More specialized cases, including mobile app file processing, are covered in the
+[included demos](demos/)
 
 ### Parsing Examples
 

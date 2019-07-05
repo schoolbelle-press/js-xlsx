@@ -57,6 +57,11 @@
 ./test_files/defined_names_simple.xml
 ./test_files/defined_names_simple.xlsx
 ./test_files/defined_names_simple.xlsb
+./test_files/defined_names_unicode.xls
+./test_files/defined_names_unicode.xml
+./test_files/defined_names_unicode.ods
+./test_files/defined_names_unicode.xlsx
+./test_files/defined_names_unicode.xlsb
 ./test_files/xlsx-stream-d-date-cell.xls
 ./test_files/xlsx-stream-d-date-cell.xls.xml
 ./test_files/xlsx-stream-d-date-cell.xlsx
@@ -115,3 +120,5 @@
 ./test_files/password_2002_40_xor.xls
 ./test_files/dbf/d11.dbf
 ./test_files/dbf/vfp3.dbf
+./test_files/wtf_path.xlsx
+./test_files/wtf_path.xlsb

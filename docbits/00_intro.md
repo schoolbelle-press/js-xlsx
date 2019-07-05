@@ -6,7 +6,7 @@ Emphasis on parsing and writing robustness, cross-format feature compatibility
 with a unified JS representation, and ES3/ES5 browser compatibility back to IE6.
 
 This is the community version.  We also offer a pro version with performance
-enhancements, additional features by request, and dedicated support.
+enhancements, additional features like styling, and dedicated support.
 
 
 [**Pro Version**](http://sheetjs.com/pro)
@@ -20,8 +20,6 @@ enhancements, additional features by request, and dedicated support.
 [**Source Code**](http://git.io/xlsx)
 
 [**Issues and Bug Reports**](https://github.com/sheetjs/js-xlsx/issues)
-
-[**Other General Support Issues**](https://discourse.sheetjs.com)
 
 [**File format support for known spreadsheet data formats:**](#file-formats)
 
@@ -43,6 +41,5 @@ enhancements, additional features by request, and dedicated support.
 [![Coverage Status](http://img.shields.io/coveralls/SheetJS/js-xlsx/master.svg)](https://coveralls.io/r/SheetJS/js-xlsx?branch=master)
 [![Dependencies Status](https://david-dm.org/sheetjs/js-xlsx/status.svg)](https://david-dm.org/sheetjs/js-xlsx)
 [![npm Downloads](https://img.shields.io/npm/dt/xlsx.svg)](https://npmjs.org/package/xlsx)
-[![ghit.me](https://ghit.me/badge.svg?repo=sheetjs/js-xlsx)](https://ghit.me/repo/sheetjs/js-xlsx)
 [![Analytics](https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/js-xlsx?pixel)](https://github.com/SheetJS/js-xlsx)
 
